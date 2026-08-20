@@ -75,7 +75,9 @@ Create a `.env` file in the `backend/` directory:
 
 ```env
 # Model settings
-MODEL_PATH=../ml/models/best_efficientnet_b0.pth
+MODEL_VERSION=v2
+MODEL_PATH_V1=../ml/models/best_efficientnet_b0.pth
+MODEL_PATH_V2=../ml/models/best_efficientnet_b0_v2.pth
 CLASS_NAMES_PATH=app/class_names.json
 DEVICE=auto                    # auto, cpu, cuda, mps
 CONFIDENCE_THRESHOLD=0.60

@@ -62,7 +62,9 @@ pip install -r requirements.txt
 
 Create `backend/.env`:
 ```env
-MODEL_PATH=../ml/models/best_efficientnet_b0.pth
+MODEL_VERSION=v2
+MODEL_PATH_V1=../ml/models/best_efficientnet_b0.pth
+MODEL_PATH_V2=../ml/models/best_efficientnet_b0_v2.pth
 CLASS_NAMES_PATH=app/class_names.json
 DEVICE=auto
 HF_MODEL_ID=Qwen/Qwen2.5-0.5B-Instruct
@@ -170,7 +172,9 @@ All settings are managed via environment variables in `backend/.env`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `MODEL_PATH` | `../ml/models/best_efficientnet_b0.pth` | Path to EfficientNet checkpoint |
+| `MODEL_VERSION` | `v2` | Explicit checkpoint selection (`v1` or `v2`) |
+| `MODEL_PATH_V1` | `../ml/models/best_efficientnet_b0.pth` | V1 EfficientNet checkpoint |
+| `MODEL_PATH_V2` | `../ml/models/best_efficientnet_b0_v2.pth` | V2 EfficientNet checkpoint |
 | `CLASS_NAMES_PATH` | `app/class_names.json` | Path to class label mappings |
 | `DEVICE` | `auto` | Compute device (auto/cpu/cuda/mps) |
 | `CONFIDENCE_THRESHOLD` | `0.60` | Minimum confidence for predictions |

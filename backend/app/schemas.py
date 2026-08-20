@@ -1,28 +1,57 @@
 from pydantic import BaseModel, Field
 
 
+# ============================================================
+# CNN PREDICTION
+# ============================================================
+
 class PredictionItem(BaseModel):
     disease: str
-    confidence: float = Field(ge=0.0, le=1.0)
+    confidence: float = Field(
+        ge=0.0,
+        le=1.0,
+    )
 
 
 class PredictionResponse(BaseModel):
     prediction: PredictionItem
-    top_predictions: list[PredictionItem]
+
+    top_predictions: list[PredictionItem] = Field(
+        max_length=5
+    )
+
     is_confident: bool
+
     message: str
 
 
+# ============================================================
+# ASSISTANT
+# ============================================================
+
 class AssistantPredictionItem(BaseModel):
     disease: str
-    confidence: float = Field(ge=0.0, le=1.0)
+
+    confidence: float = Field(
+        ge=0.0,
+        le=1.0,
+    )
 
 
 class AssistantAnswerRequest(BaseModel):
     crop: str = Field(min_length=1)
+
     disease: str = Field(min_length=1)
-    confidence: float = Field(ge=0.0, le=1.0)
-    question_type: str = Field(min_length=1)
+
+    confidence: float = Field(
+        ge=0.0,
+        le=1.0,
+    )
+
+    question_type: str = Field(
+        min_length=1
+    )
+
     top_predictions: list[AssistantPredictionItem] | None = None
 
 
@@ -35,9 +64,19 @@ class AssistantAnswerResponse(BaseModel):
 
 class AssistantAskRequest(BaseModel):
     crop: str = Field(min_length=1)
+
     disease: str = Field(min_length=1)
-    confidence: float = Field(ge=0.0, le=1.0)
-    question: str = Field(min_length=1, max_length=1000)
+
+    confidence: float = Field(
+        ge=0.0,
+        le=1.0,
+    )
+
+    question: str = Field(
+        min_length=1,
+        max_length=1000,
+    )
+
     top_predictions: list[AssistantPredictionItem] | None = None
 
 
@@ -47,6 +86,10 @@ class AssistantAskResponse(BaseModel):
     question: str
     answer: str
 
+
+# ============================================================
+# EXPLORER
+# ============================================================
 
 class DiseaseSummary(BaseModel):
     id: str
@@ -64,8 +107,12 @@ class ExplorerPlantDiseasesResponse(BaseModel):
 
 class ExplorerAnalyzeRequest(BaseModel):
     plant: str = Field(min_length=1)
+
     disease: str = Field(min_length=1)
-    topics: list[str] = Field(min_length=1)
+
+    topics: list[str] = Field(
+        min_length=1
+    )
 
 
 class ExplorerAnalyzeResponse(BaseModel):
